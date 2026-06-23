@@ -25,8 +25,19 @@ Answer findMiddleAndTail(Node* head) {
 }
 
 bool isWW(Node* head) {
+    Answer middleAndTail = findMiddleAndTail(head);
+    if (head == middleAndTail.tail) return false;
 
-    return false;
+    Node* firstHalf = head;
+    Node* secondHalf = middleAndTail.middle;
+
+    while (secondHalf != nullptr) {
+        if (firstHalf->getChar() != secondHalf->getChar()) return false;
+        firstHalf = firstHalf->getNext();
+        secondHalf = secondHalf->getNext();
+    }
+
+    return true;
 }
 
 bool isPalindrome(MutableNode* head) {

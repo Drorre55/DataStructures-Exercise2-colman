@@ -41,8 +41,34 @@ bool isWW(Node* head) {
 }
 
 bool isPalindrome(MutableNode* head) {
+    if (head == nullptr) return false;
 
-    return false;
+    int counter = 0;
+    float asciiResult = 0.0;
+    Answer middleAndTail = findMiddleAndTail(head);
+    Node* current = head;
+
+    while (current != middleAndTail.middle) {
+        if (counter % 2 == 1) {
+            asciiResult *= (float)current->getChar();
+        }
+        else {
+            asciiResult += (float)current->getChar();
+        }
+        current = current->getNext();
+        counter++;
+    }
+    while (current != nullptr) {
+        if (counter % 2 == 1) {
+            asciiResult -= (float)current->getChar();
+        }
+        else {
+            asciiResult /= (float)current->getChar();
+        }
+        current = current->getNext();
+        counter++;
+    }
+    return asciiResult == 0.0;
 }
 
 #endif // Q1_H

@@ -4,7 +4,22 @@
 #include "DS.h"
 
 Answer findMiddleAndTail(Node* head) {
-    Answer ans = {nullptr, nullptr};
+    Answer ans = {head, head};
+
+    Node* current = head;
+    int counter = 1;
+    int middleIdx = 1;
+    while (current != nullptr) {
+        ans.tail = current;
+        counter++;
+
+        if ((counter / 2) + 1 > middleIdx) {
+            ans.middle = ans.middle->getNext();
+            middleIdx++;
+        }
+        
+        current = current->getNext();
+    }
 
     return ans;
 }
